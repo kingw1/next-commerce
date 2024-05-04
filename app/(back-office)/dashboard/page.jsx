@@ -1,3 +1,4 @@
+import CustomDataTable from "@/components/backoffice/CustomDataTable";
 import DashboardCharts from "@/components/backoffice/DashboardCharts";
 import Heading from "@/components/backoffice/Heading";
 import LargeCards from "@/components/backoffice/LargeCards";
@@ -11,6 +12,7 @@ export default function page() {
       <LargeCards />
       <SmallCards />
       <DashboardCharts />
+      <CustomDataTable />
     </div>
   );
 }
