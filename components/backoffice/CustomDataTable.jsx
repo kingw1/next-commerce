@@ -15,9 +15,11 @@ export default function CustomDataTable() {
   function handlePageChange(page) {}
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">Recent Orders</h2>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="mt-8">
+      <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-50">
+        Recent Orders
+      </h2>
+      <div className="relative overflow-x-auto sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -106,11 +108,11 @@ export default function CustomDataTable() {
         >
           <span className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
             Showing{" "}
-            <span className="font-semibold text-gray-50 dark:text-white">
+            <span className="font-semibold text-gray-500 dark:text-white">
               {itemStartIndex}-{itemEndIndex}
             </span>{" "}
             of{" "}
-            <span className="font-semibold text-gray-50 dark:text-white">
+            <span className="font-semibold text-gray-500 dark:text-white">
               {data.length}
             </span>
           </span>
@@ -133,7 +135,7 @@ export default function CustomDataTable() {
                     disabled={currentPage === index + 1}
                     className={
                       currentPage === index + 1
-                        ? "flex items-center justify-center px-3 h-8 leading-tight text-gray-50 bg-blue-600 border border-blue-300 hover:bg-blue-800 hover:text-white dark:bg-blue-800 dark:border-blue-700 dark:text-blue-400 dark:hover:bg-blue-700 dark:hover:text-white"
+                        ? "flex items-center justify-center px-3 h-8 leading-tight text-gray-50 bg-blue-600 border border-blue-300 hover:bg-blue-800 hover:text-white dark:bg-slate-400 dark:border-slate-700 dark:text-slate-800 dark:hover:bg-slate-400 dark:hover:text-slate-800"
                         : "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     }
                   >
