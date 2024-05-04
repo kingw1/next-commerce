@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import logo from "../../public/logo-dark.png";
+import logo from "../../public/next-shop-logo.png";
 import {
   ChevronDown,
   ChevronRight,
