@@ -12,8 +12,6 @@ export default function CustomDataTable() {
   const itemStartIndex = startIndex + 1;
   const itemEndIndex = Math.min(startIndex + PAGE_SIZE, data.length);
 
-  function handlePageChange(page) {}
-
   return (
     <div className="mt-8">
       <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-50">
