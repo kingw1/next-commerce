@@ -7,12 +7,14 @@ import {
   ChevronDown,
   ChevronRight,
   CircleCheckBig,
+  CircleDollarSign,
   Layers3,
   LayoutGrid,
   LogOut,
   MousePointerClick,
   Package,
   Settings,
+  Shapes,
   Tractor,
   Truck,
   User,
@@ -60,6 +62,16 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
       href: "/dashboard/staff",
     },
     {
+      title: "Community",
+      icon: Shapes,
+      href: "/dashboard/community",
+    },
+    {
+      title: "Wallet",
+      icon: CircleDollarSign,
+      href: "/dashboard/wallet",
+    },
+    {
       title: "Settings",
       icon: Settings,
       href: "/dashboard/settings",
@@ -102,8 +114,8 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
     <div
       className={
         showSidebar
-          ? "sm:block mt-20 sm:mt-0 dark:bg-slate-700 bg-white space-y-6 w-64 min-h-screen text-slate-800 dark:text-slate-50 fixed left-0 top-0 shadow-md"
-          : "mt-20 sm:mt-0 hidden sm:block dark:bg-slate-700 bg-white space-y-6 w-64 min-h-screen text-slate-800 dark:text-slate-50 fixed left-0 top-0 shadow-md"
+          ? "sm:block mt-20 sm:mt-0 dark:bg-slate-700 bg-white space-y-6 w-64 h-screen text-slate-800 dark:text-slate-50 fixed left-0 top-0 shadow-md overflow-y-scroll"
+          : "mt-20 sm:mt-0 hidden sm:block dark:bg-slate-700 bg-white space-y-6 w-64 h-screen text-slate-800 dark:text-slate-50 fixed left-0 top-0 shadow-md overflow-y-scroll"
       }
     >
       <Link
