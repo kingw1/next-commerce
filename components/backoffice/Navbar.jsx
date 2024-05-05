@@ -38,10 +38,10 @@ export default function Navbar({ setShowSidebar, showSidebar }) {
 
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <div class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-transparent rounded-lg">
+            <div className="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-transparent rounded-lg">
               <Bell className="text-lime-700 dark:text-lime-500" />
-              <span class="sr-only">Notifications</span>
-              <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500  rounded-full -top-1 -end-1 dark:border-gray-900">
+              <span className="sr-only">Notifications</span>
+              <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500  rounded-full -top-1 -end-1 dark:border-gray-900">
                 20
               </div>
             </div>
