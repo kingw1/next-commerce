@@ -16,7 +16,7 @@ export default function ImageInput({
       <div className="flex justify-between items-center mb-4">
         <label
           htmlFor="course-image"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-50 mb-2 "
         >
           {label}
         </label>
@@ -37,7 +37,7 @@ export default function ImageInput({
           alt="Item image"
           width={1000}
           height={667}
-          className="w-full h-64 object-cover"
+          className="w-full h-64 object-contain"
         />
       ) : (
         <UploadDropzone
@@ -50,7 +50,7 @@ export default function ImageInput({
           }}
           onUploadError={(error) => {
             toast("Image Upload Failed, Try again");
-            console.log(`ERROR! ${error.message}`);
+            console.log(`ERROR! ${error.message}`, error);
           }}
         />
       )}

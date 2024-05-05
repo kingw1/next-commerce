@@ -1,23 +1,34 @@
 "use client";
+import ImageInput from "@/components/FormInputs/ImageInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextareaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
 import FormHeader from "@/components/backoffice/FormHeader";
+import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/generateSlug";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function NewCategory() {
+  const [imageUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(false);
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   async function onSubmit(data) {
+    setLoading(true);
     const slug = generateSlug(data.title);
     data.slug = slug;
+    data.imageUrl = imageUrl;
+
     console.log(data);
+
+    makePostRequest(setLoading, "api/categories", data, "Category", reset);
+    setImageUrl("");
   }
 
   return (
@@ -41,9 +52,16 @@ export default function NewCategory() {
             register={register}
             errors={errors}
           />
+
+          <ImageInput
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            endpoint="imageUploader"
+            label="Category Image"
+          />
         </div>
         <SubmitButton
-          isLoading={false}
+          isLoading={loading}
           buttonTitle="Save Category"
           loadingButtonTitle="Saving Category"
         />
