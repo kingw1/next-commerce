@@ -22,12 +22,6 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
@@ -150,7 +144,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
               {openMenu ? <ChevronDown /> : <ChevronRight />}
             </div>
           </CollapsibleTrigger>
-          <CollapsibleContent className="rounded-lg px-3 py-3 pl-6 bg-slate-800">
+          <CollapsibleContent className="rounded-lg px-3 py-3 pl-6">
             {catalogueLinks.map((item, i) => {
               const Icon = item.icon;
               return (
