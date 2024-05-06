@@ -15,8 +15,8 @@ import {
   Package,
   Settings,
   Shapes,
+  Store,
   Tractor,
-  Truck,
   User,
   Users,
 } from "lucide-react";
@@ -37,7 +37,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
     },
     {
       title: "Markets",
-      icon: Truck,
+      icon: Store,
       href: "/dashboard/markets",
     },
     {
