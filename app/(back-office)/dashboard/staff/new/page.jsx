@@ -6,6 +6,7 @@ import TextInput from "@/components/FormInputs/TextInput";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
+import { generateUserCode } from "@/lib/generateUserCode";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -27,11 +28,13 @@ export default function NewStaff() {
 
   async function onSubmit(data) {
     setLoading(true);
+    const code = generateUserCode("NC", data.name);
+    data.code = code;
     data.isActive = isActive;
 
     console.log(data);
 
-    makePostRequest(setLoading, "api/staff", data, "Staff", reset);
+    makePostRequest(setLoading, "api/staffs", data, "Staff", reset);
     setImageUrl("");
   }
 
@@ -53,6 +56,21 @@ export default function NewStaff() {
             label="Staff's Email Address"
             name="email"
             type="email"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="NIN (Id Number)"
+            name="nin"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Date of Birth"
+            name="dob"
+            type="date"
             register={register}
             errors={errors}
             className="w-full"
@@ -86,6 +104,14 @@ export default function NewStaff() {
             register={register}
             errors={errors}
             isRequired={false}
+          />
+
+          <ToggleInput
+            label="Status"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
           />
         </div>
         <SubmitButton
