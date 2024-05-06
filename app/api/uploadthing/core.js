@@ -30,4 +30,11 @@ export const ourFileRouter = {
       return { uploadedBy: "King" };
     }
   ),
+
+  trainingImageUploader: f({ image: { maxFileSize: "1MB" } }).onUploadComplete(
+    async ({ metadata, file }) => {
+      console.log("file url", file.url, metadata);
+      return { uploadedBy: "King" };
+    }
+  ),
 };
