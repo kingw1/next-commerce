@@ -1,9 +1,11 @@
 "use client";
+
 import ImageInput from "@/components/FormInputs/ImageInput";
 import SelectInput from "@/components/FormInputs/SelectInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextareaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
+import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/generateSlug";
@@ -30,15 +32,23 @@ export default function NewCategory() {
   const {
     register,
     reset,
+    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      isActive: true,
+    },
+  });
+
+  const isActive = watch("isActive");
 
   async function onSubmit(data) {
     setLoading(true);
     const slug = generateSlug(data.title);
     data.slug = slug;
     data.imageUrl = imageUrl;
+    data.isActive = isActive;
 
     console.log(data);
 
@@ -84,6 +94,13 @@ export default function NewCategory() {
             setImageUrl={setImageUrl}
             endpoint="categoryImageUploader"
             label="Category Image"
+          />
+          <ToggleInput
+            label="Publish"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
           />
         </div>
         <SubmitButton

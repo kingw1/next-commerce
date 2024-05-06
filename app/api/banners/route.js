@@ -9,7 +9,7 @@ export async function POST(request) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "Create Coupon Fail",
+        message: "Create Banner Fail",
         error,
       },
       { status: 500 }

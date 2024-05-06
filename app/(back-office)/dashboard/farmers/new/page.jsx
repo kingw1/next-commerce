@@ -1,51 +1,16 @@
 "use client";
-import ArrayItemInput from "@/components/FormInputs/ArrayItemInput";
-import ImageInput from "@/components/FormInputs/ImageInput";
-import SelectInput from "@/components/FormInputs/SelectInput";
+
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextareaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
-import { generateSlug } from "@/lib/generateSlug";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export default function NewProduct() {
+export default function NewFarmer() {
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
-  const [tags, setTags] = useState([]);
-
-  const categories = [
-    {
-      id: 1,
-      title: "Product 1",
-    },
-    {
-      id: 2,
-      title: "Product 2",
-    },
-    {
-      id: 3,
-      title: "Product 3",
-    },
-  ];
-  const farmers = [
-    {
-      id: 1,
-      title: "Farmer 1",
-    },
-    {
-      id: 2,
-      title: "Farmer 2",
-    },
-    {
-      id: 3,
-      title: "Farmer 3",
-    },
-  ];
-
   const {
     register,
     reset,
@@ -62,93 +27,84 @@ export default function NewProduct() {
 
   async function onSubmit(data) {
     setLoading(true);
-    const slug = generateSlug(data.title);
-    data.slug = slug;
-    data.imageUrl = imageUrl;
-    data.tags = tags;
     data.isActive = isActive;
 
     console.log(data);
 
-    makePostRequest(setLoading, "api/products", data, "Product", reset);
+    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset);
     setImageUrl("");
   }
 
   return (
     <div>
-      <FormHeader title="New Product" />
+      <FormHeader title="New Farmer" />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3"
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
-            label="Product Title"
-            name="title"
+            label="Farmer's Full Name"
+            name="name"
             register={register}
             errors={errors}
           />
+          <TextInput
+            label="Farmer's Phone"
+            name="phone"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Farmer's Email Address"
+            name="email"
+            type="email"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+
           <TextareaInput
-            label="Product Description"
-            name="description"
+            label="Farmer's Address"
+            name="physicalAddress"
             register={register}
             errors={errors}
           />
+
           <TextInput
-            label="Product SKU"
-            name="sku"
+            label="Contact Person Name"
+            name="contactPerson"
             register={register}
             errors={errors}
             className="w-full"
           />
+
           <TextInput
-            label="Product Barcode"
-            name="barcode"
+            label="Contact Person Phone"
+            name="contactPersonPhone"
             register={register}
             errors={errors}
             className="w-full"
           />
-          <TextInput
-            label="Product Price"
-            name="productPrice"
-            type="number"
+
+          <TextareaInput
+            label="Payment Terms"
+            name="terms"
             register={register}
             errors={errors}
-            className="w-full"
           />
-          <TextInput
-            label="Product Sale Price"
-            name="salePrice"
-            type="number"
+
+          <TextareaInput
+            label="Notes"
+            name="notes"
             register={register}
             errors={errors}
-            className="w-full"
+            isRequired={false}
           />
-          <SelectInput
-            label="Select Category"
-            name="categoryId"
-            register={register}
-            errors={errors}
-            className="w-full"
-            options={categories}
-          />
-          <SelectInput
-            label="Select Farmer"
-            name="farmerId"
-            register={register}
-            errors={errors}
-            className="w-full"
-            options={farmers}
-          />
-          <ImageInput
-            imageUrl={imageUrl}
-            setImageUrl={setImageUrl}
-            endpoint="productImageUploader"
-            label="Product Image"
-          />
-          <ArrayItemInput setItems={setTags} items={tags} itemTitle="Tag" />
+
           <ToggleInput
-            label="Publish"
+            label="Status"
             name="isActive"
             trueTitle="Active"
             falseTitle="Draft"
@@ -157,8 +113,8 @@ export default function NewProduct() {
         </div>
         <SubmitButton
           isLoading={loading}
-          buttonTitle="Save Product"
-          loadingButtonTitle="Saving Product"
+          buttonTitle="Save Farmer"
+          loadingButtonTitle="Saving Farmer"
         />
       </form>
     </div>
