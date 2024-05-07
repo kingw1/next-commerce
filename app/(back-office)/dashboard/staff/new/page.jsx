@@ -7,6 +7,7 @@ import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateUserCode } from "@/lib/generateUserCode";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -25,6 +26,10 @@ export default function NewStaff() {
   });
 
   const isActive = watch("isActive");
+  const router = useRouter();
+  function redirect() {
+    router.push("/dashboard/staff");
+  }
 
   async function onSubmit(data) {
     setLoading(true);
@@ -34,7 +39,7 @@ export default function NewStaff() {
 
     console.log(data);
 
-    makePostRequest(setLoading, "api/staffs", data, "Staff", reset);
+    makePostRequest(setLoading, "api/staffs", data, "Staff", reset, redirect);
     setImageUrl("");
   }
 

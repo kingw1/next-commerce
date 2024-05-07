@@ -9,6 +9,7 @@ import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/generateSlug";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -59,6 +60,10 @@ export default function NewProduct() {
   });
 
   const isActive = watch("isActive");
+  const router = useRouter();
+  function redirect() {
+    router.push("/dashboard/products");
+  }
 
   async function onSubmit(data) {
     setLoading(true);
@@ -70,7 +75,14 @@ export default function NewProduct() {
 
     console.log(data);
 
-    makePostRequest(setLoading, "api/products", data, "Product", reset);
+    makePostRequest(
+      setLoading,
+      "api/products",
+      data,
+      "Product",
+      reset,
+      redirect
+    );
     setImageUrl("");
   }
 

@@ -9,25 +9,12 @@ import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/generateSlug";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function NewCategory() {
   const [imageUrl, setImageUrl] = useState("");
-  const markets = [
-    {
-      id: 1,
-      title: "Spoutes Farmers Market",
-    },
-    {
-      id: 2,
-      title: "Carrot Farmers Market",
-    },
-    {
-      id: 3,
-      title: "Bloccori Farmers Market",
-    },
-  ];
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -42,6 +29,10 @@ export default function NewCategory() {
   });
 
   const isActive = watch("isActive");
+  const router = useRouter();
+  function redirect() {
+    router.push("/dashboard/categories");
+  }
 
   async function onSubmit(data) {
     setLoading(true);
@@ -52,7 +43,14 @@ export default function NewCategory() {
 
     console.log(data);
 
-    makePostRequest(setLoading, "api/categories", data, "Category", reset);
+    makePostRequest(
+      setLoading,
+      "api/categories",
+      data,
+      "Category",
+      reset,
+      redirect
+    );
     setImageUrl("");
   }
 
@@ -69,17 +67,6 @@ export default function NewCategory() {
             name="title"
             register={register}
             errors={errors}
-            className="w-full"
-          />
-
-          <SelectInput
-            label="Select Markets"
-            name="marketIds"
-            register={register}
-            errors={errors}
-            className="w-full"
-            options={markets}
-            multiple={true}
           />
 
           <TextareaInput

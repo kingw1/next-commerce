@@ -6,6 +6,7 @@ import TextInput from "@/components/FormInputs/TextInput";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -24,14 +25,20 @@ export default function NewFarmer() {
   });
 
   const isActive = watch("isActive");
+  const router = useRouter();
+  function redirect() {
+    router.push("/dashboard/farmers");
+  }
 
   async function onSubmit(data) {
     setLoading(true);
+    const code = generateUserCode("NC", data.name);
+    data.code = code;
     data.isActive = isActive;
 
     console.log(data);
 
-    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset);
+    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset, redirect);
     setImageUrl("");
   }
 
@@ -70,6 +77,7 @@ export default function NewFarmer() {
             name="physicalAddress"
             register={register}
             errors={errors}
+            isRequired={false}
           />
 
           <TextInput
@@ -78,6 +86,7 @@ export default function NewFarmer() {
             register={register}
             errors={errors}
             className="w-full"
+            isRequired={false}
           />
 
           <TextInput
@@ -86,6 +95,7 @@ export default function NewFarmer() {
             register={register}
             errors={errors}
             className="w-full"
+            isRequired={false}
           />
 
           <TextareaInput
@@ -93,6 +103,7 @@ export default function NewFarmer() {
             name="terms"
             register={register}
             errors={errors}
+            isRequired={false}
           />
 
           <TextareaInput

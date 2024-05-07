@@ -10,6 +10,7 @@ import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/generateSlug";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -44,6 +45,10 @@ export default function NewTraning() {
   });
 
   const isActive = watch("isActive");
+  const router = useRouter();
+  function redirect() {
+    router.push("/dashboard/community");
+  }
 
   async function onSubmit(data) {
     setLoading(true);
@@ -55,7 +60,14 @@ export default function NewTraning() {
 
     console.log(data);
 
-    makePostRequest(setLoading, "api/trainings", data, "Traning", reset);
+    makePostRequest(
+      setLoading,
+      "api/trainings",
+      data,
+      "Traning",
+      reset,
+      redirect
+    );
     setImageUrl("");
     setContent("");
   }
